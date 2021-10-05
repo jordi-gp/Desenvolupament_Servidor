@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formularis Activitat 263</title>
+    <style>
+        table{
+            border: 1px solid black;
+            background-color: aquamarine;
+        }
+
+        tr{
+            border: 1px solid black;
+            background-color: cadetblue;
+        }
+
+        th{
+            border: 1px solid black;
+            background-color: cornflowerblue;
+        }
+
+        td{
+            border: 1px solid black;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Activitats amb Formularis II</h1>
+    <form action="formularis263.php" method="get">
+        <p>Introdueix el teu nom</p>
+        <input type="text" name="nombre" size="15" required/>
+        <p>Introdueix el teu cognom</p>
+        <input type="text" name="apellido" size="15" required/>
+        <p>Introdueix el teu número de telefon</p>
+        <input type="text" name="telefono" size="15" required/>
+        <p>Introdueix el teu correu electrònic</p>
+        <input type="text" name="correo" size="25" required/>
+
+        <br><br><input type="submit" value="Enviar" />
+
+    </form>
+</body>
+</html>
