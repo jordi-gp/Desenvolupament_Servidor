@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<form action="264Formulari.php" method="post">
+<form action="265Formulari.php" method="post">
         <pre>
         <?php
         if (!empty($errors))
