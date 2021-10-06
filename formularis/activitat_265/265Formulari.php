@@ -13,6 +13,21 @@ $firstname = "";
 $lastname = "";
 $phone = "";
 $email = "";
+
+$sexe = [
+    'home' => 'Home',
+    'dona' => 'Dona',
+    'noBinari' => 'NoBinari'
+    ];
+
+$hobbies = [
+    'hobbie1' => 'Esmorsar',
+    'hobbie2' => 'Llegir',
+    'hobbie3' => 'Pintar',
+    'hobbie4' => 'Programar'
+];
+
+$horari = "";
 $errors = [];
 
 // per a la vista necessitem saber si s'ha processat el formulari
@@ -30,7 +45,7 @@ if (isPost()) {
         $errors[] = "Error en validar el nom";
 
 
-/*    if (empty($_POST["firstname"])) {
+    /*if (empty($_POST["firstname"])) {
         $errors[] = "Nombre requerido";
     } else {
         if (strlen($_POST["firstname"]) > 25) {
@@ -45,9 +60,6 @@ if (isPost()) {
     else
         $errors[] = "Apellido vacio o erròneo";
 
-
-
-
     if (empty($_POST["phone"])) {
         $errors[] = "Telèfon requerit";
     } else {
@@ -57,12 +69,15 @@ if (isPost()) {
             $errors[] = "Tlfn no valido, deben ser exactamente 9 digitos";
         }
     }
+
     $emailTest = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     if (empty($emailTest)) {
         $errors[] = "Correu electrònic no indicat o erroni";
     } else {
         $email = $emailTest;
     }
+
+
 }
 
 require "265Formulari.view.php";
