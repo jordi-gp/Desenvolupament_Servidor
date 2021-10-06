@@ -36,6 +36,34 @@
         <input type="text" name="email" value="<?=$email?>">
     </div>
     <div>
+        <input type="radio" id="home" name="genere" value="home" />
+        <label for="home">Home</label>
+    </div>
+    <div>
+        <input type="radio" id="dona" name="genere" value="dona" />
+        <label for="dona">Dona</label>
+    </div>
+    <div>
+        <input type="radio" id="nobinari" name="genere" value="nobinari" />
+        <label for="nobinari">No Binari</label>
+    </div>
+    <div>
+        <input type="checkbox" id="hobbie1" name="hobbie1" value="esmorsar" />
+        <label for="hobbie1">Anar a Esmorsar</label>
+    </div>
+    <div>
+        <input type="checkbox" id="hobbie2" name="hobbie2" value="llegir" />
+        <label for="hobbie2">Llegir</label>
+    </div>
+    <div>
+        <input type="checkbox" id="hobbie3" name="hobbie3" value="pintar" />
+        <label for="hobbie3">Pintar</label>
+    </div>
+    <div>
+        <input type="checkbox" id="hobbie4" name="hobbie4" value="programar" />
+        <label for="hobbie4">Programar</label>
+    </div>
+    <div>
         <input type="submit" value="Enviar">
     </div>
 </form>
