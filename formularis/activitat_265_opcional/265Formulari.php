@@ -13,9 +13,21 @@ $firstname = $_POST['firstname'] ?? null;
 $lastname = $_POST['lastname'] ?? null;
 $phone = $_POST['phone'] ?? null;
 $email = $_POST['email'] ?? null;
-$hobbies = $_POST['hobbies'] ?? null;
 $contact_time = $_POST['contact_time'] ?? null;
 $horari = "";
+
+$genere = [
+    "M" => "Home",
+    "F" => "Dpma",
+    "NB" => "No Binari"
+];
+
+$hobbies = [
+    "1" => "Anar a Esmorsar",
+    "2" => "Llegir",
+    "3" => "Pintar",
+    "4" => "Programar"
+];
 
 $errors = [];
 $infForm = [];
@@ -67,11 +79,6 @@ if (isPost()) {
         $email = $emailTest;
     }
 
-    if (empty($hobbies)){
-        $errors[] = "No s'ha seleccinat cap hobbie";
-    } else {
-        $infForm[] = $hobbies;
-    }
 
 
 }

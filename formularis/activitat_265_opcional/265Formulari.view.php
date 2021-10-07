@@ -83,11 +83,11 @@
         </div>
         <div>
             <input type="checkbox" name="hobbie2" id="hobbie2" value="" />
-            <label for="hobbie2">Llegir</label>
+            <label for="hobbie2">Dormir</label>
         </div>
         <div>
             <input type="checkbox" name="hobbie3" id="hobbie3" value="" />
-            <label for="hobbie3">Pintar</label>
+            <label for="hobbie3">Llegir</label>
         </div>
         <div>
             <input type="checkbox" name="hobbie4" id="hobbie4" value="" />
@@ -102,6 +102,13 @@
             <option value="3">Després de dinar (14:00 a 16:00)</option>
             <option value="4">Per la nit(20:00 a 22:00)</option>
         </select>
+    </div>
+    <div>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="MAX_FILE_SIZE" value="10240">
+            <input type="file" name="image" />
+            <input type="submit" value="Upload" />
+        </form>
     </div>
     <div id="enviar">
         <input type="submit" value="Enviar">
