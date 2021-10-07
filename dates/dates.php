@@ -1,57 +1,84 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Activitats sobre dates amb PHP</h1>
+<?php
 
-    <h2>Activitat 3</h2>
+// Inicialitze les variables perquè existisquen en tots els possibles camins
+// Sols emmagatzameré en elles valors vàlids.
+// Acumularé els errors en un array per a mostrar-los al final.
+// Use la sintaxi alternativa de les estructures de control per a la part de vistes.
+// Cree funció clean per a netejar valors
 
-    <ol>
-        <?php
-            //Exercici 1
-            echo "<li>"."Mostra la data actual i hora actuals amb el format 'd/m/Y hh:mm:ss'."."</li>";
-            echo "<p>"."La data actual es ".date("d/m/Y")."."."</p>";
-            echo "<p>"."L'hora actual es ".date("H:i:s")."."."</p>";
 
-            //Exerici 2
-            echo "<li>"."Mostra el nom de la zona horària que s'utilitza per defecte."."</li>";
-            echo "<p>"."El nom de la zona horària utilitzada per defecte es ".date("e")."."."</p>";
+require "helpers.php";
 
-            //Exercici 3
-            echo "<li>"."Mostra la data que serà d'ací 45 dies"."</li>";
-            $dataAct = date("d/m/Y");
-            echo "<p>"."Dins de 45 díes la data serà ".date("d/m/Y", strtotime($dataAct . " + 45 days"))."."."</p>";
+$firstname = "";
+$lastname = "";
+$phone = "";
+$email = "";
+$genre = "";
+$hobbies = [];
+$contactTime=[];
+$errors = [];
 
-            //Exercici 4
-            echo "<li>"."Mostra el nombre de dies que han pasat des de l'1 de gener."."</li>";
-            $data = mktime(0, 0, 0, 1, 1, 2021);
-            $diferencia = time() - $data;
+// per a la vista necessitem saber si s'ha processat el formulari
+$isPost = false;
 
-            $diferenciaEnDies = ((($diferencia /60) /60) /24);
-            /*
-             * Amb la primera divisió s'obtenen els minuts
-             * Amb la segona divisió s'obtenen els segons
-             * Amb la tercera divisió s'obtenen els dies
-             */
-            echo "<p>"."Han pasat ". round($diferenciaEnDies). " dies desde l'1 de gener de 2021."."</p>";
+if (isPost()) {
 
-            //Exercici 5
-            echo "<li>"."Mostra la data i hora actuals de Nova York"."</li>";
-            $zonaHoraria = date_default_timezone_set("America/New_York");
-            echo "<p>"."La data actual de Nova York es ".date("d/m/Y")."."."</p>";
-            echo "<p>"."L'hora actual de Nova York es ".date("H:i:s")."."."</p>";
+    $isPost = true;
 
-            //Exercici 6
-            echo "<li>"."Mostra el dia de la setmana que era l'1 de gener d'enguany."."</li>";
-            echo "<p>"."The first day of January in 2021 was ".date("l", strtotime("1 January 2021"))."."."</p>";
-        ?>
-</ol>
+    if (validate_string($_POST["firstname"], 1, 25 ))
+        $firstname = clear($_POST["firstname"]);
+    else
+        $errors[] = "Error en validar el nom";
 
-</body>
-</html>
+
+    /*    if (empty($_POST["firstname"])) {
+            $errors[] = "Nombre requerido";
+        } else {
+            if (strlen($_POST["firstname"]) > 25) {
+                $errors[] = "Nombre no valido, no puede superar los 25 carácteres";
+            } else {
+                $firstname = clear($_POST["firstname"]);
+            }
+        }*/
+
+    if (validate_string($_POST["lastname"], 3, 50))
+        $lastname = clear($_POST["lastname"]);
+    else
+        $errors[] = "Apellido vacio o erròneo";
+
+
+    if (empty($_POST["phone"])) {
+        $errors[] = "Telèfon requerit";
+    } else {
+        if (preg_match("/^\d{9}$/", $_POST["phone"])) {
+            $phone = $_POST["phone"];
+        } else {
+            $errors[] = "Tlfn no valido, deben ser exactamente 9 digitos";
+        }
+    }
+    $emailTest = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
+    if (empty($emailTest)) {
+        $errors[] = "Correu electrònic no indicat o erroni";
+    } else {
+        $email = $emailTest;
+    }
+
+    if (empty($_POST["genre"]))
+        $errors[]="Has de triar un gènere";
+    else
+        $genre = $_POST["genre"];
+
+
+    if (is_empty($_POST["hobbies"] ?? []))
+        $errors[]="Has de triar almenys un hobbie";
+    else
+        $hobbies = $_POST["hobbies"];
+
+    if (is_empty($_POST["contact-time"] ?? []))
+        $errors[]="Has de triar almenys un hora";
+    else
+        $contactTime=$_POST["contact-time"];
+
+}
+
+require "265Formulari.view.php";

@@ -9,36 +9,21 @@
 
 require "helpers.php";
 
-$firstname = $_POST['firstname'] ?? null;
-$lastname = $_POST['lastname'] ?? null;
-$phone = $_POST['phone'] ?? null;
-$email = $_POST['email'] ?? null;
-$contact_time = $_POST['contact_time'] ?? null;
-$horari = "";
-
-$genere = [
-    "M" => "Home",
-    "F" => "Dpma",
-    "NB" => "No Binari"
-];
-
-$hobbies = [
-    "1" => "Anar a Esmorsar",
-    "2" => "Llegir",
-    "3" => "Pintar",
-    "4" => "Programar"
-];
-
+$firstname = "";
+$lastname = "";
+$phone = "";
+$email = "";
+$genre = "";
+$imatge = "";
+$hobbies = [];
+$contactTime=[];
 $errors = [];
-$infForm = [];
 
 // per a la vista necessitem saber si s'ha processat el formulari
 $isPost = false;
 
-
-
 if (isPost()) {
-    
+
     $isPost = true;
 
     if (validate_string($_POST["firstname"], 1, 25 ))
@@ -47,20 +32,21 @@ if (isPost()) {
         $errors[] = "Error en validar el nom";
 
 
-    /*if (empty($_POST["firstname"])) {
-        $errors[] = "Nombre requerido";
-    } else {
-        if (strlen($_POST["firstname"]) > 25) {
-            $errors[] = "Nombre no valido, no puede superar los 25 carácteres";
+    /*    if (empty($_POST["firstname"])) {
+            $errors[] = "Nombre requerido";
         } else {
-            $firstname = clear($_POST["firstname"]);
-        }
-    }*/
+            if (strlen($_POST["firstname"]) > 25) {
+                $errors[] = "Nombre no valido, no puede superar los 25 carácteres";
+            } else {
+                $firstname = clear($_POST["firstname"]);
+            }
+        }*/
 
     if (validate_string($_POST["lastname"], 3, 50))
         $lastname = clear($_POST["lastname"]);
     else
         $errors[] = "Apellido vacio o erròneo";
+
 
     if (empty($_POST["phone"])) {
         $errors[] = "Telèfon requerit";
@@ -71,7 +57,6 @@ if (isPost()) {
             $errors[] = "Tlfn no valido, deben ser exactamente 9 digitos";
         }
     }
-
     $emailTest = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     if (empty($emailTest)) {
         $errors[] = "Correu electrònic no indicat o erroni";
@@ -79,7 +64,43 @@ if (isPost()) {
         $email = $emailTest;
     }
 
+    if (empty($_POST["genre"]))
+        $errors[]="Has de triar un gènere";
+    else
+        $genre = $_POST["genre"];
 
+
+    if (is_empty($_POST["hobbies"] ?? []))
+        $errors[]="Has de triar almenys un hobbie";
+    else
+        $hobbies = $_POST["hobbies"];
+
+    if (is_empty($_POST["contact-time"] ?? []))
+        $errors[]="Has de triar almenys un hora";
+    else
+        $contactTime=$_POST["contact-time"];
+
+    $nom = $_FILES["image"]["name"];
+    $ruta = $_FILES["image"]["tmp_name"];
+
+    if (!file_exists("upload")){
+        mkdir("upload",777, true);
+        if(file_exists("upload")){
+            if (move_uploaded_file($ruta, "upload/".$nom)){
+                echo "Archivo guardado correctamente";
+            }else{
+                echo "Archivo no encontrado";
+            }
+        }
+    }else{
+        if(file_exists("upload")){
+            if (move_uploaded_file($ruta, "upload/".$nom)){
+                echo "Archivo guardado correctamente";
+            }else{
+                echo "Archivo no encontrado";
+            }
+        }
+    }
 
 }
 

@@ -3,114 +3,117 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Actividad 274: Formulari</title>
+    <title>Actividad 265: Formulari</title>
     <meta name="description" content="PHP, PHPStorm">
-    <meta name="author" content="Homer Simpson">
+    <meta name="author" content="Vicent Jordà">
     <style>
-        body {
-            font-family: "Bitstream Vera Serif"
-        }
-
-        #infPersonal {
-            border: 1px solid black;
-            margin-right: 75%;
-            margin-bottom: 20px;
-        }
-
-        #sexe {
-            border: 1px solid black;
-            margin-right: 75%;
-            margin-bottom: 20px;
-        }
-
-        #hobbies {
-            border: 1px solid black;
-            margin-right: 75%;
-            margin-bottom: 20px;
-        }
-
-        #enviar {
-            margin-top: 20px;
-        }
+        body { font-family: "Bitstream Vera Serif"}
     </style>
 </head>
 
 <body>
-<form action="" method="post">
+<form method="post" enctype="multipart/form-data">
         <pre>
         <?php
+        print_r($_FILES);
         if (!empty($errors))
             print_r($errors)
         ?>
         </pre>
+    <div>
+        <label for="firstname">Name</label>
+        <input id="firstname" type="text" name="firstname" value="<?=$firstname?>">
+    </div>
+    <div>
+        <label for="lastname">Cognoms</label>
+        <input id="lastname" type="text" name="lastname" value="<?=$lastname?>">
+    </div>
+    <div>
+        <label for="phone">Telèfon</label>
+        <input id="phone" type="text" name="phone" value="<?=$phone?>">
+    </div>
+    <div>
+        <label for="email">Correu electrònic</label>
+        <input id="email" type="text" name="email" value="<?=$email?>">
+    </div>
 
-    <div id="infPersonal">
-        <div>
-            <label for="firstname">Name</label>
-            <input type="text" name="firstname" value="<?=$firstname?>">
-        </div>
-        <div>
-            <label for="lastname">Cognoms</label>
-            <input type="text" name="lastname" value="<?=$lastname?>">
-        </div>
-        <div>
-            <label for="phone">Telèfon</label>
-            <input type="text" name="phone" value="<?=$phone?>">
-        </div>
-        <div>
-            <label for="email">Correu electrònic</label>
-            <input type="text" name="email" value="<?=$email?>">
-        </div>
-    </div>
-    <div id="sexe">
-        <div>
-            <input type="radio" name="genere" id="home" value="" />
-            <label for="home">Home</label>
-        </div>
-        <div>
-            <input type="radio" name="genere" id="dona" value="" />
-            <label for="dona">Dona</label>
-        </div>
-        <div>
-            <input type="radio" name="genere" id="nobinari" value="" />
-            <label for="nobinari">No Binari</label>
-        </div>
-    </div>
-    <div id="hobbies">
-        <div>
-            <input type="checkbox" name="hobbie1" id="hobbie1" value="" />
-            <label for="hobbie1">Anar a Esmorsar</label>
-        </div>
-        <div>
-            <input type="checkbox" name="hobbie2" id="hobbie2" value="" />
-            <label for="hobbie2">Dormir</label>
-        </div>
-        <div>
-            <input type="checkbox" name="hobbie3" id="hobbie3" value="" />
-            <label for="hobbie3">Llegir</label>
-        </div>
-        <div>
-            <input type="checkbox" name="hobbie4" id="hobbie4" value="" />
-            <label for="hobbie4">Programar</label>
-        </div>
-    </div>
-        <label for="horaris">Contact-Time</label><br>
-        <select multiple name="horaris" id="horaris">
+    <div>
+        <p>Génere</p>
+        <label for="genre1">
+            <input id="genre1" type="radio" name="genre" value="M"
+                <?php if ("M" == $genre)
+                    echo "checked";
+                ?>>
 
-            <option value="1">Primer hora (08:00 a 10:00)</option>
-            <option value="2">Abans de dinar (12:00 a 13:00)</option>
-            <option value="3">Després de dinar (14:00 a 16:00)</option>
-            <option value="4">Per la nit(20:00 a 22:00)</option>
+            Home
+        </label>
+
+        <label for="genre2">
+            <input id="genre2" type="radio" name="genre" value="W"
+                <?php if ("W" == $genre)
+                    echo "checked";
+                ?>>
+            Dona
+        </label>
+        <label for="genre3">
+            <input id="genre3" type="radio" name="genre" value="N"
+                <?php if ("N" == $genre)
+                    echo "checked";
+                ?>>
+
+            No binari
+        </label>
+    </div>
+
+    <div>
+        <p>Hobbies</p>
+        <label for="hobbie1">
+            <input id="hobbie1" type="checkbox" name="hobbies[]" value="reading"
+                <?php if (is_selected("reading", $hobbies))
+                    echo "checked";
+                ?>>
+            Lectura
+        </label>
+        <label for="hobbie2">
+            <input id="hobbie2" type="checkbox" name="hobbies[]" value="programming"
+                <?php if (is_selected("programming", $hobbies))
+                    echo "checked";
+                ?>>
+
+            Programació
+        </label>
+        <label for="hobbie3">
+            <input id="hobbie3" type="checkbox" name="hobbies[]" value="cycling"
+                <?php if (is_selected("cycling", $hobbies))
+                    echo "checked";
+                ?>>
+
+            Ciclisme
+        </label>
+        <label for="hobbie4">
+            <input id="hobbie4" type="checkbox" name="hobbies[]" value="running"
+                <?php if (is_selected("running", $hobbies))
+                    echo "checked";
+                ?>>
+
+            Running
+        </label>
+    </div>
+    <div>
+        <p>Contact time</p>
+        <select name="contact-time[]" multiple="multiple">
+            <option <?=is_selected("range-1", $contactTime)?"selected":""?> value="range-1">Primera hora (08:00 a 10:00)</option>
+            <option <?=is_selected("range-2", $contactTime)?"selected":""?> value="range-2"> Abans de dinar (12:00 a 13:00)</option>
+            <option <?=is_selected("range-3", $contactTime)?"selected":""?> value="range-3">Després de dinar (14:00 a 16:00)</option>
+            <option <?=is_selected("range-4", $contactTime)?"selected":""?> value="range-4">Per la nit (20:00 a 22:00)</option>
         </select>
     </div>
     <div>
-        <form action="" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="MAX_FILE_SIZE" value="10240">
-            <input type="file" name="image" />
-            <input type="submit" value="Upload" />
-        </form>
+        <input type="hidden" name="MAX_FILE_SIZE" value="10240">
+        <input type="file" name="image"/>
     </div>
-    <div id="enviar">
+
+    <div>
         <input type="submit" value="Enviar">
     </div>
 </form>
@@ -119,34 +122,48 @@
     <table>
         <tr>
             <th>Nom</th>
-            <td><?=$firstname?></td>
+            <td><?= $firstname ?></td>
         </tr>
         <tr>
             <th>Cognom</th>
-            <td><?=$lastname?></td>
+            <td><?= $lastname ?></td>
         </tr>
         <tr>
             <th>Telèfon</th>
-            <td><?=$phone?></td>
+            <td><?= $phone ?></td>
         </tr>
         <tr>
-            <th>Correu</th>
-            <td><?=$email?></td>
-        </tr>
-        <tr>
-            <th>Sexe</th>
-            <td><?=$sexe?></td>
+            <th>Genere</th>
+            <td><?= $genre ?></td>
         </tr>
         <tr>
             <th>Hobbies</th>
-            <td><?=$hobbies?></td>
+            <td><?php foreach($hobbies as $hobbie):?>
+                    <p><?=$hobbie?></p>
+                <?php endforeach;?>
+            </td>
+        </tr>
+
+        <tr><th>Contact time</th>
+            <td><?php foreach($contactTime as $contact):?>
+                    <p><?=$contact?></p>
+                <?php endforeach;?>
+            </td>
         </tr>
         <tr>
-            <th>Horari</th>
-            <td><?=$horari?></td>
+            <th>Correu</th>
+            <td><?= $email ?></td>
+        </tr>
+        <tr>
+            <th>Imatge</th>
+            <td><img src="upload/<?=$nom?>"></td>
         </tr>
     </table>
+
+
 <?php endif ?>
+
+
 </body>
 
 </html>
