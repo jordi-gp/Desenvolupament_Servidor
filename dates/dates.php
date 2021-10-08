@@ -81,4 +81,4 @@ if (isPost()) {
 
 }
 
-require "265Formulari.view.php";
+require "281Formulari.view.php";
