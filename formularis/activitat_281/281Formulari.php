@@ -16,6 +16,9 @@ $email = "";
 $genre = "";
 $imatge = "";
 $hobbies = [];
+$idImatge = rand();
+$ruta = "upload/";
+
 $contactTime=[];
 $errors = [];
 
@@ -83,25 +86,21 @@ if (isPost()) {
     $nom = $_FILES["image"]["name"];
     $ruta = $_FILES["image"]["tmp_name"];
 
-    if (!file_exists("upload")){
-        if(file_exists("upload")){
-            if (move_uploaded_file($ruta, "upload/".$nom)){
-                echo "Archivo guardado correctamente";
-            }else{
-                echo "Archivo no encontrado";
+    if (!empty($_FILES["image"]) && $_FILES["image"]["error"] == UPLOAD_ERR_OK) {
+
+        //Comprovem que l'extensio del fitxer es '.jpg'
+        if($_FILES["image"]["type"] != "image/jpeg"){
+            $errors[]="L'extensio de l'imatge ha de ser 'image/jpg'!";
+        } else {
+            //Comprovem la mida del fitxer
+            if($_FILES["image"]["size"] >= 1000000){
+                $errors[]="El tamany del fitxer no pot ser superior a 1MB";
+            } else {
+                move_uploaded_file($_FILES["image"]["tmp_name"], "upload/".$idImatge);
             }
-        }
-    }else{
-        if(file_exists("upload")){
-            if (move_uploaded_file($ruta, "upload/".$nom)){
-                echo "Archivo guardado correctamente";
-            }else{
-                echo "Archivo no encontrado";
-                echo $_FILES["image"]["size"];
-            }
+
         }
     }
-
 }
 
 require "281Formulari.view.php";

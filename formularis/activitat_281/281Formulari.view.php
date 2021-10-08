@@ -109,7 +109,7 @@
         </select>
     </div>
     <div>
-        <input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+        <input type="hidden">
         <input type="file" name="image"/>
     </div>
 
@@ -156,7 +156,7 @@
         </tr>
         <tr>
             <th>Imatge</th>
-            <td><img src="upload/<?=$nom?>"></td>
+            <td><img src="upload/<?=$idImatge?>"></td>
         </tr>
     </table>
 
