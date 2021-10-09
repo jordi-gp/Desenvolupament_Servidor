@@ -13,10 +13,32 @@ $firstname = "";
 $lastname = "";
 $phone = "";
 $email = "";
-$genre = "";
 $imatge = "";
+$genre = "";
 $hobbies = [];
-$contactTime=[];
+$contactTime = [];
+
+$genere = array(
+    "H" => "Home",
+    "D" => "Dona",
+    "NB" => "No Binari"
+);
+
+$hobbies1 = array(
+    "Hobbie1" => "Lectura",
+    "Hobbie2" => "Programació",
+    "Hobbie3" => "Ciclisme",
+    "Hobbie4" => "Running"
+);
+
+$contactTime1 = array(
+    "range-1" => "Primer Hora",
+    "range-2" => "Segon Hora",
+    "range-3" => "Tercer Hora",
+    "range-4" => "Cuarta Hora"
+);
+
+
 $errors = [];
 
 // per a la vista necessitem saber si s'ha processat el formulari
