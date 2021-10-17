@@ -8,8 +8,7 @@ function isPost(): bool {
     return $_SERVER["REQUEST_METHOD"]==="POST";
 }
 
-function validate_string(string $string, int $minLength = 1, int $maxLength = 50000): bool
-{
+function validate_string(string $string, int $minLength = 1, int $maxLength = 50000): bool {
     if (strlen($string) < $minLength || strlen($string)>$maxLength)
         return false;
 
