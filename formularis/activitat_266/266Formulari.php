@@ -48,7 +48,7 @@ if (isPost()) {
 
     $isPost = true;
 
-    if (validate_string($_POST["firstname"], 1, 25 )){
+    if (validate_string($_POST["firstname"], 1, 25)){
         $firstname = clear($_POST["firstname"]);
     } else {
         $errors[] = "Error en validar el nom";
