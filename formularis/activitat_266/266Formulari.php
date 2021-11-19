@@ -48,11 +48,11 @@ if (isPost()) {
 
     $isPost = true;
 
-    if (validate_string($_POST["firstname"], 1, 25 ))
+    if (validate_string($_POST["firstname"], 1, 25)){
         $firstname = clear($_POST["firstname"]);
-    else
+    } else {
         $errors[] = "Error en validar el nom";
-
+    }
 
     /*    if (empty($_POST["firstname"])) {
             $errors[] = "Nombre requerido";
@@ -64,11 +64,11 @@ if (isPost()) {
             }
         }*/
 
-    if (validate_string($_POST["lastname"], 3, 50))
+    if (validate_string($_POST["lastname"], 3, 50)){
         $lastname = clear($_POST["lastname"]);
-    else
+    } else {
         $errors[] = "Apellido vacio o erròneo";
-
+    }
 
     if (empty($_POST["phone"])) {
         $errors[] = "Telèfon requerit";
@@ -79,6 +79,7 @@ if (isPost()) {
             $errors[] = "Tlfn no valido, deben ser exactamente 9 digitos";
         }
     }
+
     $emailTest = filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL);
     if (empty($emailTest)) {
         $errors[] = "Correu electrònic no indicat o erroni";
@@ -86,21 +87,23 @@ if (isPost()) {
         $email = $emailTest;
     }
 
-    if (empty($_POST["genre"]))
+    if (empty($_POST["genre"])) {
         $errors[]="Has de triar un gènere";
-    else
+    } else {
         $genre = $_POST["genre"];
+    }
 
-
-    if (is_empty($_POST["hobbies"] ?? []))
+    if (is_empty($_POST["hobbies"] ?? [])){
         $errors[]="Has de triar almenys un hobbie";
-    else
+    } else {
         $hobbies = $_POST["hobbies"];
+    }
 
-    if (is_empty($_POST["contact-time"] ?? []))
+    if (is_empty($_POST["contact-time"] ?? [])) {
         $errors[]="Has de triar almenys un hora";
-    else
+    } else {
         $contactTime=$_POST["contact-time"];
+    }
 
     $nom = $_FILES["image"]["name"];
     $ruta = $_FILES["image"]["tmp_name"];
@@ -123,7 +126,6 @@ if (isPost()) {
             }
         }
     }
-
 }
 
 require "266Formulari.view.php";
