@@ -5,7 +5,7 @@ session_start();
 require "helpers.php";
 require 'src/Exceptions/FileUploadException.php';
 require_once 'src/Exceptions/NoUploadedFileException.php';
-require_once 'src/Exceptions/InvalidEmailValidationException.php';
+require_once 'src/Exceptions/InvalidMailException.php';
 
 const MAX_SIZE = 1024 * 1000;
 const SCREENSHOT_PATH = "uploads";
