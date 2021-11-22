@@ -9,7 +9,7 @@ if(!isPost()){
     $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
     if(!empty($id)){
-        $stmt = $pdo->prepare("SELECT * FROM TICKET WHERE id = :id");
+        $stmt = $pdo->prepare("SELECT * FROM ticket WHERE id = :id");
         $stmt->bindValue("id", $id);
         $stmt->execute();
 
