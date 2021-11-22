@@ -18,7 +18,7 @@ if(!isPost()){
 } else {
     $id = filter_input(INPUT_POST, "id", FILTER_VALIDATE_INT);
 
-    if(!empty($id)){
+    if(empty($id)){
         throw new Exception("El id obtingut no es vàlid");
     }
 
