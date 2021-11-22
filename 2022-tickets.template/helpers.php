@@ -51,6 +51,11 @@ function validate_phone(string $phone):bool {
 }
 
 function validate_email(string $email): bool {
+    $emailTest = filter_var($email, FILTER_VALIDATE_EMAIL);
+
+    if(empty($emailTest)){
+        throw new InvalidMailException("Email incorrecte!");
+    }
  return true;
 }
 
