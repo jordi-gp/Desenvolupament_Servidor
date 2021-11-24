@@ -37,21 +37,22 @@ if (!isPost()) {
 if(!empty($errors)){
     try {
         if (!empty($_FILES['screenshot']) && ($_FILES['screenshot']['error'] == UPLOAD_ERR_OK)) {
-            if (!file_exists(SCREENSHOT_PATH))
+            if (!file_exists(SCREENSHOT_PATH)) {
+
                 mkdir(SCREENSHOT_PATH, 0777, true);
 
-            $tempFilename = $_FILES["screenshot"]["tmp_name"];
-            $currentFilename = $_FILES["screenshot"]["name"];
+                $tempFilename = $_FILES["screenshot"]["tmp_name"];
+                $currentFilename = $_FILES["screenshot"]["name"];
 
-            $mimeType = getFileExtension($tempFilename);
+                $mimeType = getFileExtension($tempFilename);
 
-            $extension = explode("/", getFileExtension($tempFilename))[1];
-            $newFilename = md5((string)rand()) . "." . $extension;
-            $newFullFilename = SCREENSHOT_PATH . "/" . $newFilename;
-            $fileSize = $_FILES["screenshot"]["size"];
-
-
-            throw new InvalidTypeFileException("La foto no és d'un tipus permés");
+                $extension = explode("/", getFileExtension($tempFilename))[1];
+                $newFilename = md5((string)rand()) . "." . $extension;
+                $newFullFilename = SCREENSHOT_PATH . "/" . $newFilename;
+                $fileSize = $_FILES["screenshot"]["size"];
+            }else {
+                throw new InvalidTypeFileException("La foto no és d'un tipus permés");
+            }
 
             if (!move_uploaded_file($tempFilename, $newFullFilename)){
                 throw new FileUploadException("No s'ha pogut moure la foto");
